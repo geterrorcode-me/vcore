@@ -5,16 +5,31 @@
       "selection": {
         "end": {
           "column": 0,
-          "index": 0,
-          "line": 0
+          "index": 2779,
+          "line": 78
         },
         "start": {
           "column": 0,
-          "index": 0,
-          "line": 0
+          "index": 2779,
+          "line": 78
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/cpp/vphone_core.cpp",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 957,
+          "line": 27
+        },
+        "start": {
+          "column": 0,
+          "index": 957,
+          "line": 27
         }
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/java/com/aar/test/virtual/VHookCore.java"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/cpp/vphone_core.cpp"
 }

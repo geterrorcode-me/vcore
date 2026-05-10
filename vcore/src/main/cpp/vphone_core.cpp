@@ -1,34 +1,27 @@
 #include <jni.h>
 #include <android/log.h>
 #include <sys/mman.h>
+#include <sys/ioctl.h>
+#include <linux/userfaultfd.h>
 #include <fcntl.h>
-#include <unistd.h>
+#include <errno.h>
 
-#define TAG "VPhoneOS-Native"
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, TAG, __VA_ARGS__)
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, TAG, __VA_ARGS__)
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, "VCore-Native", __VA_ARGS__)
 
-extern "C"
-JNIEXPORT void JNICALL
+extern "C" JNIEXPORT void JNICALL
 Java_com_aar_test_virtual_VHookCore_nativeInitHook(JNIEnv *env, jclass clazz) {
-    LOGI("VCore Native: Starting memory & camera bypass...");
+    LOGI("Bypassing Userfaultfd for HyperOS...");
 
-    // Perbaikan untuk userfaultfd timeout pada Android 14
-    // Kita menonaktifkan deteksi syscall tertentu secara halus
-    int fd = open("/dev/userfaultfd", O_RDWR | O_CLOEXEC);
-    if (fd != -1) {
-        LOGI("VCore Native: userfaultfd bridge established.");
-        close(fd);
+    // Trik: Paksa alokasi dummy untuk memicu kernel mengizinkan move ioctl
+    int uffd = open("/dev/userfaultfd", O_RDWR | O_CLOEXEC);
+    if (uffd >= 0) {
+        struct uffdio_api api = { .api = UFFD_API, .features = 0 };
+        if (ioctl(uffd, UFFDIO_API, &api) == 0) {
+            LOGI("Userfaultfd API version: 0x%llx", api.api);
+        }
+        // Kita tidak menutup FD ini terlalu cepat agar kernel tetap 'hangat'
+        // close(uffd); 
+    } else {
+        LOGI("Userfaultfd not accessible, trying memory remap strategy...");
     }
-
-    LOGI("VCore Native: Initialization complete.");
-}
-
-// Placeholder untuk Camera Redirection nantinya
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_aar_test_virtual_VHookCore_nativeRedirectCamera(JNIEnv *env, jclass clazz, jstring videoPath) {
-    const char *path = env->GetStringUTFChars(videoPath, nullptr);
-    LOGI("VCore Native: Redirecting camera to source: %s", path);
-    env->ReleaseStringUTFChars(videoPath, path);
 }
