@@ -5,43 +5,13 @@
       "selection": {
         "end": {
           "column": 0,
-          "index": 1697,
-          "line": 48
+          "index": 3089,
+          "line": 92
         },
         "start": {
           "column": 0,
-          "index": 1697,
-          "line": 48
-        }
-      }
-    },
-    {
-      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/java/com/aar/test/virtual/VHookCore.java",
-      "selection": {
-        "end": {
-          "column": 0,
-          "index": 1091,
-          "line": 39
-        },
-        "start": {
-          "column": 0,
-          "index": 1091,
-          "line": 39
-        }
-      }
-    },
-    {
-      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/build.gradle",
-      "selection": {
-        "end": {
-          "column": 0,
-          "index": 1433,
-          "line": 60
-        },
-        "start": {
-          "column": 0,
-          "index": 1433,
-          "line": 60
+          "index": 3089,
+          "line": 92
         }
       }
     }
