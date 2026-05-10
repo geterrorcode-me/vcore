@@ -1,32 +1,17 @@
 {
   "allFiles": [
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/build.gradle",
-      "selection": {
-        "end": {
-          "column": 5,
-          "index": 703,
-          "line": 36
-        },
-        "start": {
-          "column": 5,
-          "index": 703,
-          "line": 36
-        }
-      }
-    },
-    {
       "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/cpp/vphone_core.cpp",
       "selection": {
         "end": {
           "column": 0,
-          "index": 989,
-          "line": 32
+          "index": 1072,
+          "line": 28
         },
         "start": {
           "column": 0,
-          "index": 989,
-          "line": 32
+          "index": 1072,
+          "line": 28
         }
       }
     },
@@ -35,13 +20,28 @@
       "selection": {
         "end": {
           "column": 0,
-          "index": 3523,
-          "line": 97
+          "index": 1091,
+          "line": 39
         },
         "start": {
           "column": 0,
-          "index": 3523,
-          "line": 97
+          "index": 1091,
+          "line": 39
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/build.gradle",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 950,
+          "line": 50
+        },
+        "start": {
+          "column": 0,
+          "index": 950,
+          "line": 50
         }
       }
     }
