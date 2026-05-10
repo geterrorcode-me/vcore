@@ -1,26 +1,21 @@
-plugins {
-    id 'com.android.library'
+// Top-level build file
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // Sesuaikan versi ini dengan versi Android Studio kamu, misal 8.2.0 atau 8.1.1
+        classpath 'com.android.tools.build:gradle:8.2.0'
+    }
 }
 
-android {
-    namespace 'com.aar.test.virtual'
-    compileSdk 34
+plugins {
+    // Ini cara alternatif untuk mendefinisikan versi plugin di Gradle modern
+    id 'com.android.application' version '8.2.0' apply false
+    id 'com.android.library' version '8.2.0' apply false
+}
 
-    defaultConfig {
-        minSdk 26
-        targetSdk 34
-
-        externalNativeBuild {
-            cmake {
-                cppFlags "-std=c++17"
-                abiFilters "arm64-v8a", "armeabi-v7a"
-            }
-        }
-    }
-
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"
-        }
-    }
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
