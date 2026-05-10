@@ -1,35 +1,20 @@
 {
   "allFiles": [
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/build.gradle",
-      "selection": {
-        "end": {
-          "column": 5,
-          "index": 577,
-          "line": 29
-        },
-        "start": {
-          "column": 5,
-          "index": 577,
-          "line": 29
-        }
-      }
-    },
-    {
-      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/CMakeLists.txt",
+      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/CMakeLists.txt",
       "selection": {
         "end": {
           "column": 0,
-          "index": 228,
-          "line": 16
+          "index": 0,
+          "line": 0
         },
         "start": {
           "column": 0,
-          "index": 228,
-          "line": 16
+          "index": 0,
+          "line": 0
         }
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/CMakeLists.txt"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/CMakeLists.txt"
 }
