@@ -1,17 +1,17 @@
 {
   "allFiles": [
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/java/com/aar/test/virtual/VHookCore.java",
+      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/build.gradle",
       "selection": {
         "end": {
-          "column": 0,
-          "index": 2779,
-          "line": 78
+          "column": 5,
+          "index": 703,
+          "line": 36
         },
         "start": {
-          "column": 0,
-          "index": 2779,
-          "line": 78
+          "column": 5,
+          "index": 703,
+          "line": 36
         }
       }
     },
@@ -20,16 +20,31 @@
       "selection": {
         "end": {
           "column": 0,
-          "index": 957,
-          "line": 27
+          "index": 989,
+          "line": 32
         },
         "start": {
           "column": 0,
-          "index": 957,
-          "line": 27
+          "index": 989,
+          "line": 32
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/java/com/aar/test/virtual/VHookCore.java",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 3523,
+          "line": 97
+        },
+        "start": {
+          "column": 0,
+          "index": 3523,
+          "line": 97
         }
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/cpp/vphone_core.cpp"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/build.gradle"
 }

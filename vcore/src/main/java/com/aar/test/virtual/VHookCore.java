@@ -4,75 +4,94 @@ import android.content.Context;
 import android.util.Log;
 import java.lang.reflect.Method;
 
+/**
+ * VHookCore: Engine Utama Virtual OS
+ * Dioptimalkan khusus untuk menembus proteksi Android 14 HyperOS (Xiaomi)
+ */
 public class VHookCore {
     private static final String TAG = "VPhoneOS-HookCore";
     private static boolean isInstalled = false;
 
     static {
         try {
+            // Memuat library native untuk penanganan memori & syscall
             System.loadLibrary("vphone_core");
-            Log.i(TAG, "Native Library loaded.");
+            Log.i(TAG, "Native Library 'libvphone_core.so' loaded.");
         } catch (UnsatisfiedLinkError e) {
-            Log.e(TAG, "Native Library not found.");
+            Log.e(TAG, "CRITICAL: Native Library not found!");
         }
     }
 
+    /**
+     * Memasang hook sistem untuk aplikasi target
+     */
     public static void install(Context context, String targetPkg, String apkPath) {
         if (isInstalled) return;
-        
-        // GUNAKAN TRIK BARU: Bootstrap Bypass
-        applyDeepBypass();
 
+        Log.i(TAG, ">>> INITIATING HARD-HOOK FOR: " + targetPkg + " <<<");
+
+        // 1. BYPASS HIDDEN API (Solusi Fix InvocationTargetException)
+        applyHyperOSBypass();
+
+        // 2. PMS PROXY (Memalsukan Identitas APK)
         try {
             VPMSProxy.inject(context, targetPkg, apkPath);
+            Log.i(TAG, "Identity Proxy (PMS) Injected.");
         } catch (Exception e) {
-            Log.e(TAG, "PMS Hook Error: " + e.getMessage());
+            Log.e(TAG, "PMS Injection Failed: " + e.getMessage());
         }
 
+        // 3. NATIVE HANDSHAKE (Fix Userfaultfd Timeout)
         try {
             nativeInitHook();
-        } catch (Exception e) {}
+            Log.i(TAG, "Native System Bridge Ready.");
+        } catch (UnsatisfiedLinkError e) {
+            Log.e(TAG, "Native bridge failed to connect.");
+        }
 
         isInstalled = true;
     }
 
     /**
-     * Taktik "Unsafe" untuk Android 14 HyperOS
-     * Kita menggunakan method 'setHiddenApiExemptions' melalui refleksi 
-     * yang dipicu oleh ClassLoader sistem.
+     * Teknik Double-Reflection: 
+     * Memanggil 'setHiddenApiExemptions' dengan menyamar sebagai sistem inti.
      */
-    private static void applyDeepBypass() {
+    private static void applyHyperOSBypass() {
         try {
-            // Langkah 1: Dapatkan method getRuntime
-            Method getRuntime = Class.class.getDeclaredMethod("getDeclaredMethod", String.class, Class[].class);
+            // Kita tidak memanggil VMRuntime secara langsung, tapi lewat 'Class' handle
+            Method getMethod = Class.class.getDeclaredMethod("getDeclaredMethod", String.class, Class[].class);
             Class<?> vmRuntimeClass = Class.forName("dalvik.system.VMRuntime");
             
-            Method getRuntimeMethod = (Method) getRuntime.invoke(vmRuntimeClass, "getRuntime", (Object) null);
-            Object runtime = getRuntimeMethod.invoke(null);
+            // Dapatkan instance Runtime
+            Method getRuntime = (Method) getMethod.invoke(vmRuntimeClass, "getRuntime", (Object) null);
+            Object runtime = getRuntime.invoke(null);
 
-            // Langkah 2: Dapatkan method setHiddenApiExemptions
-            Method setExemptions = (Method) getRuntime.invoke(vmRuntimeClass, "setHiddenApiExemptions", new Class[]{String[].class});
+            // Dapatkan method pengecualian API
+            Method setExemptions = (Method) getMethod.invoke(vmRuntimeClass, "setHiddenApiExemptions", new Class[]{String[].class});
             
-            // Langkah 3: Eksekusi dengan menyamar sebagai sistem
+            // "L" adalah wildcard untuk membebaskan SEMUA akses API internal (Hidden API)
             setExemptions.invoke(runtime, new Object[]{new String[]{"L"}});
             
-            Log.i(TAG, ">>> DEEP BYPASS SUCCESSFUL <<<");
+            Log.i(TAG, ">>> HYPER-OS BYPASS GRANTED <<<");
         } catch (Exception e) {
-            Log.e(TAG, "Deep Bypass Failed, mencoba fallback...");
-            fallbackBypass();
+            Log.e(TAG, "Deep Bypass Failed, Fallback to Native logic: " + e.toString());
         }
     }
 
-    private static void fallbackBypass() {
+    /**
+     * Mengarahkan output kamera ke file video
+     * @param videoPath path ke file mp4 (misal: /sdcard/video.mp4)
+     */
+    public static void setVirtualCamera(String videoPath) {
         try {
-            // Taktik cadangan menggunakan Meta-Class
-            Method forName = Class.class.getDeclaredMethod("forName", String.class);
-            Class<?> vmRuntimeClass = (Class<?>) forName.invoke(null, "dalvik.system.VMRuntime");
-            // ... (logika bypass sederhana)
-            Log.i(TAG, "Fallback Bypass Executed.");
-        } catch (Exception e) {}
+            nativeRedirectCamera(videoPath);
+            Log.i(TAG, "Virtual Camera directed to: " + videoPath);
+        } catch (UnsatisfiedLinkError e) {
+            Log.e(TAG, "Native camera redirect not supported.");
+        }
     }
 
+    // --- Native Linkage ---
     private static native void nativeInitHook();
     private static native void nativeRedirectCamera(String videoPath);
 }
