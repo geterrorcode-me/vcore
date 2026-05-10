@@ -1,3 +1,28 @@
+<p align="left">
+  <img src="https://img.shields.io/github/stars/geterrorcode-me/vcore?style=social" />
+  <img src="https://img.shields.io/github/forks/geterrorcode-me/vcore?style=social" />
+  <img src="https://img.shields.io/github/issues/geterrorcode-me/vcore?style=social" />
+</p>
+
+
+
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-Android%2010--14+-green?style=flat-square&logo=android" />
+  <img src="https://img.shields.io/badge/Architecture-ARM64%20%7C%20ARMv7-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/Language-Java%20%7C%20C%2B%2B-orange?style=flat-square&logo=cplusplus" />
+  <img src="https://img.shields.io/badge/NDK-r25c%2B-blueviolet?style=flat-square" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/actions/workflow/status/geterrorcode-me/vcore/android.yml?style=for-the-badge&logo=github&label=Engine%20Build" />
+  <img src="https://img.shields.io/github/v/release/geterrorcode-me/vcore?style=for-the-badge&color=orange&logo=github" />
+  <img src="https://img.shields.io/badge/License-GPL--3.0-red?style=for-the-badge&logo=opensourceinitiative" />
+</p>
+
+
+
+
 # VCore Engine (vphone_core)
 
 **VCore** adalah engine virtualisasi runtime Android tingkat lanjut yang dirancang untuk menjalankan aplikasi dalam lingkungan terisolasi (sandbox) tanpa memerlukan instalasi sistem atau root. 
@@ -11,6 +36,15 @@ Berbeda dengan cloner biasa, VCore menggunakan arsitektur **Container-based Virt
 * **Instrumentation Swapping:** Teknik "Identity Theft" pada lifecycle activity untuk menukar komponen host dengan komponen target secara real-time.
 * **Stealth Memory Bridge:** Komunikasi antar-proses (IPC) terenkripsi untuk menghindari pelacakan sistem.
 * **Anti-Detection Armed:** Melindungi proses virtual dari pengecekan lingkungan (root detection/emulator check).
+
+### 🛡️ Core Security Status
+| Component | Security Level | Status |
+| :--- | :--- | :--- |
+| **Native Bridge** | ![High](https://img.shields.io/badge/-High-red) | ![Armed](https://img.shields.io/badge/-Bypassed-brightgreen) |
+| **AMS/ATM Hook** | ![Critical](https://img.shields.io/badge/-Critical-orange) | ![Active](https://img.shields.io/badge/-Functional-blue) |
+| **Hidden API** | ![Bypass](https://img.shields.io/badge/-Bypass-blueviolet) | ![Verified](https://img.shields.io/badge/-Verified-success) |
+| **Stealth Mode** | ![Stealth](https://img.shields.io/badge/-Stealth-black) | ![Enabled](https://img.shields.io/badge/-Enabled-lightgrey) |
+
 
 ## 🏗️ Arsitektur Teknis
 
@@ -27,6 +61,9 @@ VCore bekerja pada tiga layer utama:
    VHookCore.install(context, "com.target.package", "/path/to/target.apk");
 
   ---
+
+
+
 
   # ⚠️ DISCLAIMER (PENTING)
 
