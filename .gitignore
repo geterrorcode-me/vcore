@@ -1,0 +1,30 @@
+# Android Studio & IntelliJ
+.idea/
+*.iml
+.gradle/
+build/
+capture/
+local.properties
+.DS_Store
+
+# Modul vcore (Build artifacts)
+vcore/build/
+vcore/.cxx/
+vcore/obj/
+vcore/libs/
+
+# App utama
+app/build/
+
+# Native/C++ artifacts
+.externalNativeBuild/
+.cxx/
+cmake_install.cmake
+CMakeCache.txt
+CMakeFiles/
+Makefile
+
+# Log & Temp
+*.log
+*.temp
+*.swp
