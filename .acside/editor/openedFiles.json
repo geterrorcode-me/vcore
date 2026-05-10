@@ -34,14 +34,14 @@
       "file": "/storage/emulated/0/AndroidIDEProjects/vcore/.github/workflows/build.yml",
       "selection": {
         "end": {
-          "column": 10,
-          "index": 500,
-          "line": 19
+          "column": 0,
+          "index": 614,
+          "line": 27
         },
         "start": {
-          "column": 10,
-          "index": 500,
-          "line": 19
+          "column": 0,
+          "index": 614,
+          "line": 27
         }
       }
     },
@@ -59,7 +59,52 @@
           "line": 12
         }
       }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/cpp/vphone_core.cpp",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 1179,
+          "line": 34
+        },
+        "start": {
+          "column": 0,
+          "index": 1179,
+          "line": 34
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/java/com/aar/test/virtual/VHookCore.java",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 1282,
+          "line": 45
+        },
+        "start": {
+          "column": 0,
+          "index": 1282,
+          "line": 45
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/java/com/aar/test/virtual/VEnvironment.java",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 1002,
+          "line": 27
+        },
+        "start": {
+          "column": 0,
+          "index": 1002,
+          "line": 27
+        }
+      }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/.gitignore"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/.github/workflows/build.yml"
 }
