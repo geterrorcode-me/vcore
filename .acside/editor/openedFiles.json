@@ -104,7 +104,22 @@
           "line": 27
         }
       }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/settings.gradle",
+      "selection": {
+        "end": {
+          "column": 15,
+          "index": 15,
+          "line": 0
+        },
+        "start": {
+          "column": 15,
+          "index": 15,
+          "line": 0
+        }
+      }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/.github/workflows/build.yml"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/settings.gradle"
 }
