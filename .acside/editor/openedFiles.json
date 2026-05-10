@@ -5,13 +5,13 @@
       "selection": {
         "end": {
           "column": 0,
-          "index": 1072,
-          "line": 28
+          "index": 1697,
+          "line": 48
         },
         "start": {
           "column": 0,
-          "index": 1072,
-          "line": 28
+          "index": 1697,
+          "line": 48
         }
       }
     },
@@ -46,5 +46,5 @@
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/build.gradle"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/cpp/vphone_core.cpp"
 }
