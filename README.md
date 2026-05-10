@@ -4,6 +4,11 @@
   <img src="https://img.shields.io/github/issues/geterrorcode-me/vcore?style=social" />
 </p>
 
+<p align="center">
+  <img src="https://img.shields.io/github/actions/workflow/status/geterrorcode-me/vcore/android.yml?style=for-the-badge&logo=github&label=Engine%20Build" />
+  <img src="https://img.shields.io/github/v/release/geterrorcode-me/vcore?style=for-the-badge&color=orange&logo=github" />
+  <img src="https://img.shields.io/badge/License-GPL--3.0-red?style=for-the-badge&logo=opensourceinitiative" />
+</p>
 
 
 
@@ -14,11 +19,6 @@
   <img src="https://img.shields.io/badge/NDK-r25c%2B-blueviolet?style=flat-square" />
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/github/actions/workflow/status/geterrorcode-me/vcore/android.yml?style=for-the-badge&logo=github&label=Engine%20Build" />
-  <img src="https://img.shields.io/github/v/release/geterrorcode-me/vcore?style=for-the-badge&color=orange&logo=github" />
-  <img src="https://img.shields.io/badge/License-GPL--3.0-red?style=for-the-badge&logo=opensourceinitiative" />
-</p>
 
 
 
