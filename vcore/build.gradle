@@ -17,6 +17,12 @@ android {
             }
         }
     }
+    
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs'] // Jika kamu copy manual
+        }
+    }
 
     externalNativeBuild {
         cmake {

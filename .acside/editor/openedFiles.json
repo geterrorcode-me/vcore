@@ -1,20 +1,20 @@
 {
   "allFiles": [
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/gradle/wrapper/gradle-wrapper.properties",
+      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/build.gradle",
       "selection": {
         "end": {
-          "column": 69,
-          "index": 134,
-          "line": 2
+          "column": 5,
+          "index": 468,
+          "line": 24
         },
         "start": {
-          "column": 69,
-          "index": 134,
-          "line": 2
+          "column": 5,
+          "index": 468,
+          "line": 24
         }
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/gradle/wrapper/gradle-wrapper.properties"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/build.gradle"
 }
