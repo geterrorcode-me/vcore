@@ -4,103 +4,78 @@ import android.content.Context;
 import android.util.Log;
 import java.lang.reflect.Method;
 
-/**
- * VHookCore adalah jantung dari Virtual Engine.
- * Bertanggung jawab atas inisialisasi bypass sistem, pemuatan native library,
- * dan penyuntikan proxy identitas aplikasi.
- */
 public class VHookCore {
     private static final String TAG = "VPhoneOS-HookCore";
     private static boolean isInstalled = false;
 
     static {
         try {
-            // Memuat library native C++ untuk menangani memory & syscall hook
             System.loadLibrary("vphone_core");
             Log.i(TAG, "Native Library 'libvphone_core.so' loaded successfully.");
         } catch (UnsatisfiedLinkError e) {
-            Log.e(TAG, "CRITICAL: Native Library not found! Check your AAR/JNI build.");
+            Log.e(TAG, "Native Library NOT FOUND! Check your AAR build.");
         }
     }
 
     /**
-     * Memasang semua hook yang diperlukan untuk menjalankan aplikasi virtual.
+     * Inti dari inisialisasi lingkungan virtual.
      */
     public static void install(Context context, String targetPkg, String apkPath) {
-        if (isInstalled) {
-            Log.w(TAG, "HookCore already installed. Skipping...");
-            return;
-        }
+        if (isInstalled) return;
 
         Log.i(TAG, ">>> Installing Virtual Engine for: " + targetPkg + " <<<");
 
-        // 1. Bypass Hidden API (Membuka gembok internal Android 11-14)
+        // 1. Bypass Hidden API (Fix FAILED status on Android 14)
         bypassHiddenApi();
 
-        // 2. PMS Hooking (Memalsukan identitas paket/APK)
+        // 2. PMS Hooking (Memalsukan identitas APK)
         try {
             VPMSProxy.inject(context, targetPkg, apkPath);
-            Log.i(TAG, "Identity Proxy (PMS) injected.");
         } catch (Exception e) {
-            Log.e(TAG, "Failed to inject PMS Proxy: " + e.getMessage());
+            Log.e(TAG, "PMS Injection failed: " + e.getMessage());
         }
 
-        // 3. Native Initialization (Fix userfaultfd & Layar Putih)
+        // 3. Native Hook (Fix Userfaultfd & Camera logic)
         try {
             nativeInitHook();
-            Log.i(TAG, "Native Memory Bridge initialized.");
         } catch (UnsatisfiedLinkError e) {
-            Log.e(TAG, "Native method 'nativeInitHook' not found!");
+            Log.e(TAG, "Native method init failed.");
         }
 
         isInstalled = true;
     }
 
     /**
-     * Teknik Meta-Reflection untuk mematikan proteksi Hidden API di Android 14.
+     * Teknik Meta-Reflection untuk menembus proteksi API internal Android 14.
      */
     private static void bypassHiddenApi() {
         try {
-            // Kita memanggil refleksi di dalam refleksi agar tidak terdeteksi sistem
-            Method forNameMethod = Class.class.getDeclaredMethod("forName", String.class);
+            // Gunakan refleksi ganda untuk membingungkan verifikasi sistem
+            Method forName = Class.class.getDeclaredMethod("forName", String.class);
             Method getDeclaredMethod = Class.class.getDeclaredMethod("getDeclaredMethod", String.class, Class[].class);
 
-            Class<?> vmRuntimeClass = (Class<?>) forNameMethod.invoke(null, "dalvik.system.VMRuntime");
-            Method getRuntimeMethod = (Method) getDeclaredMethod.invoke(vmRuntimeClass, "getRuntime", (Object) null);
-            Object runtime = getRuntimeMethod.invoke(null);
+            Class<?> vmRuntimeClass = (Class<?>) forName.invoke(null, "dalvik.system.VMRuntime");
+            Method getRuntime = (Method) getDeclaredMethod.invoke(vmRuntimeClass, "getRuntime", (Object) null);
+            Object runtime = getRuntime.invoke(null);
 
-            Method setExemptionsMethod = (Method) getDeclaredMethod.invoke(vmRuntimeClass, "setHiddenApiExemptions", new Class[]{String[].class});
+            Method setExemptions = (Method) getDeclaredMethod.invoke(vmRuntimeClass, "setHiddenApiExemptions", new Class[]{String[].class});
             
-            // "L" adalah wildcard untuk mengizinkan SEMUA API internal
-            setExemptionsMethod.invoke(runtime, new Object[]{new String[]{"L"}});
-            Log.i(TAG, "Hidden API Bypass: SUCCESS (Meta-Reflection)");
+            // Memberikan pengecualian untuk semua library (L)
+            setExemptions.invoke(runtime, new Object[]{new String[]{"L"}});
+            Log.i(TAG, "Hidden API Bypass: GRANTED (Android 14 Optimized)");
         } catch (Exception e) {
-            Log.e(TAG, "Hidden API Bypass: FAILED -> " + e.getMessage());
+            Log.e(TAG, "Hidden API Bypass: CRITICAL FAILURE -> " + e.toString());
         }
     }
 
-    /**
-     * Mengarahkan input kamera ke file video tertentu.
-     * @param videoPath Path lengkap ke file .mp4
-     */
     public static void setVirtualCamera(String videoPath) {
         try {
             nativeRedirectCamera(videoPath);
-            Log.i(TAG, "Camera redirection set to: " + videoPath);
         } catch (UnsatisfiedLinkError e) {
-            Log.e(TAG, "Native camera redirect not available.");
+            Log.e(TAG, "Native camera redirect failed.");
         }
     }
 
-    // --- Native Methods ---
-    
-    /**
-     * Inisialisasi hook tingkat rendah (C++) untuk memori dan syscall.
-     */
     private static native void nativeInitHook();
-
-    /**
-     * Melakukan inline hooking pada driver kamera di level native.
-     */
     private static native void nativeRedirectCamera(String videoPath);
 }

@@ -1,7 +1,7 @@
 {
   "allFiles": [
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/CMakeLists.txt",
+      "file": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/java/com/aar/test/virtual/VHookCore.java",
       "selection": {
         "end": {
           "column": 0,
@@ -16,5 +16,5 @@
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/CMakeLists.txt"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/vcore/vcore/src/main/java/com/aar/test/virtual/VHookCore.java"
 }
