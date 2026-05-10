@@ -13,24 +13,22 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++17 -frtti -fexceptions"
+                // Fokus pada arm64-v8a untuk performa maksimal di Android modern
                 abiFilters "arm64-v8a"
             }
         }
     }
 
     buildTypes {
-        release {
-            minifyEnabled false
-        }
-    }
-    
-    buildTypes {
         debug {
+            minifyEnabled false
+            // Mencegah error llvm-strip di AndroidIDE
             packagingOptions {
                 doNotStrip "**/*.so"
             }
         }
         release {
+            minifyEnabled false
             packagingOptions {
                 doNotStrip "**/*.so"
             }
@@ -43,10 +41,14 @@ android {
     }
     
     packagingOptions {
-        doNotStrip "*/libvphone_core.so"
+        // Gabungkan semua konfigurasi packaging di sini
         jniLibs {
+            // Memaksa library native tidak dikompresi di dalam APK (penting untuk loading native)
             useLegacyPackaging = true
         }
+        // Pastikan library utama tidak kena strip
+        doNotStrip "*/libvphone_core.so"
+        doNotStrip "*/libblackhook.so"
     }
 
     externalNativeBuild {
